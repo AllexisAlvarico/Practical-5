@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 
 class Vector3f
@@ -16,18 +17,20 @@ public:
 
 	Vector3f operator +(const Vector3f t_right) const;
 	Vector3f operator -(const Vector3f t_right) const;
-	Vector3f operator *(const double t_scalar) const;
+	Vector3f operator -(Vector3f V);
+	Vector3f operator *(const double k) const;
+	Vector3f operator *(double k) const;
+	Vector3f operator *(const float k) const;
+	Vector3f operator *(const int k) const;
 	Vector3f operator /(const double t_divisor) const;
-	Vector3f operator +=(const Vector3f t_right);
-	Vector3f operator -=(const Vector3f t_right);
-
-
+	Vector3f operator ^(Vector3f V1) const;
 	double length()const;
 	double lengthSquared()const;
 	void normalise(); // vector changes and will have length 1 
 
 
 private:
+
 
 	double m_x;
 	double m_y;

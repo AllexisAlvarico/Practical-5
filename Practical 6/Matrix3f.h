@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Vector3f.h"
 
 
@@ -40,6 +41,8 @@ public:
 	static Matrix3f translation(const Vector3f t_displacement); // 2d translation make sure z=1
 	static Matrix3f scale(const double t_scalingfactor);
 
+private:
+	sf::Vector3f newVector = {}; // vector's assignments
 	double A11;
 	double A12;
 	double A13;
@@ -49,8 +52,6 @@ public:
 	double A31;
 	double A32;
 	double A33;
-private:
-
 
 };
 
