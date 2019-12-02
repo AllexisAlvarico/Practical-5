@@ -60,7 +60,7 @@ Matrix3f Matrix3f::operator-(const Matrix3f t_other) const
 
 Matrix3f Matrix3f::operator-(const Matrix3f t_matrix3f)
 {
-	return -1 * t_matrix3f;
+	return (t_matrix3f * -1);
 }
 
 Matrix3f Matrix3f::operator*(const double x) const
@@ -80,6 +80,13 @@ Matrix3f Matrix3f::operator*(const double x) const
 	return m_answer;
 }
 
+Vector3f Matrix3f::operator*(Vector3f V1)
+{
+	return Vector3f(A11 * V1.m_x + A12 * V1.m_y + A13 * V1.m_z,
+		A21 * V1.m_x + A22 * V1.m_y + A23 * V1.m_z,
+		A31 * V1.m_x + A32 * V1.m_y + A33 * V1.m_z);
+}
+
 Matrix3f Matrix3f::transpose() const
 {
 	return{A11, A21, A31,
@@ -87,15 +94,36 @@ Matrix3f Matrix3f::transpose() const
 		A13, A23, A33};
 }
 
-double Matrix3f::determinant() const
+double Matrix3f::determinant(Matrix3f t_other) const
 {
 	return (A11 * A22 * A33 - A11 * A32 * A23 + A21 * A32 *
 		A13 - A31 * A22 * A13 + A31* A12 * A23- A21 * A12 * A33);
 }
 
-Matrix3f Matrix3f::inverse() const
+Matrix3f Matrix3f::inverse(Matrix3f t_other) const
 {
-	return Matrix3f();
+	double det = determinant(t_other);
+	if (det == 0)
+		return Matrix3f();
+	else
+	{
+		double scale = 1 / det;
+		Matrix3f m_answer = Matrix3f();
+		m_answer.A11 = scale * (t_other.A22 * t_other.A33 - t_other.A23 * t_other.A32); // ei-fh
+		m_answer.A12 = scale * (t_other.A13 * t_other.A32 - t_other.A12 * t_other.A33); // ch-bi
+		m_answer.A13 = scale * (t_other.A12 * t_other.A23 - t_other.A13 * t_other.A22); // ch-bi
+
+		m_answer.A21 = scale * (t_other.A23 * t_other.A31 - t_other.A21 * t_other.A33); // fg-di
+		m_answer.A22 = scale * (t_other.A11 * t_other.A33 - t_other.A13 * t_other.A31); // ai-cg
+		m_answer.A23 = scale * (t_other.A13 * t_other.A21 - t_other.A11 * t_other.A23); // cd-af
+
+
+		m_answer.A31 = scale * (t_other.A21 * t_other.A32 - t_other.A22 * t_other.A31); // dh-eg
+		m_answer.A32 = scale * (t_other.A12 * t_other.A31 - t_other.A11 * t_other.A32); // bg-ah
+		m_answer.A33 = scale * (t_other.A11 * t_other.A22 - t_other.A12 * t_other.A21); // ae-bd
+
+		return m_answer;
+	}
 }
 
 Matrix3f Matrix3f::operator*(const Matrix3f t_other) const
@@ -144,40 +172,103 @@ Vector3f Matrix3f::column(const int t_column) const
 
 Matrix3f Matrix3f::rotationZ(const double t_angleRadians)
 {
-	return Matrix3f();
+	double m_radians = PI / 180 * t_angleRadians;
+	Matrix3f m_answer;
+	m_answer.A11 = cos(m_radians);
+	m_answer.A12 = -sin(m_radians);
+	m_answer.A13 = 0;
+	m_answer.A21 = sin(m_radians);
+	m_answer.A22 = cos(m_radians);
+	m_answer.A23 = 0;
+	m_answer.A31 = 0;
+	m_answer.A32 = 0;
+	m_answer.A33 = 1;
+
+	return m_answer;
 }
 
 Matrix3f Matrix3f::rotationY(const double t_angleRadians)
 {
-	return Matrix3f();
+	double m_radians = PI / 180 * t_angleRadians;
+	Matrix3f m_answer;
+	m_answer.A11 = cos(m_radians);
+	m_answer.A12 = 0;
+	m_answer.A13 = sin(m_radians);
+	m_answer.A21 = 0;
+	m_answer.A22 = 1;
+	m_answer.A23 = 0;
+	m_answer.A31 = -sin(m_radians);
+	m_answer.A32 = 0;
+	m_answer.A33 = cos(m_radians);
+
+	return m_answer;
 }
 
 Matrix3f Matrix3f::rotationX(const double t_angleRadians)
 {
-	return Matrix3f();
+	double m_radians = PI / 180 * t_angleRadians;
+	Matrix3f m_answer;
+	m_answer.A11 = 1;
+	m_answer.A12 = 0;
+	m_answer.A13 = 0;
+	m_answer.A21 = 0;
+	m_answer.A22 = cos(m_radians);
+	m_answer.A23 = -sin(m_radians);
+	m_answer.A31 = 0;
+	m_answer.A32 = sin(m_radians);
+	m_answer.A33 = cos(m_radians);
+
+	return m_answer;
 }
 
-Matrix3f Matrix3f::translation(const Vector3f t_displacement)
+Matrix3f Matrix3f::translation(const int dx, int dy)
 {
-	return Matrix3f();
+	Matrix3f m_answer;
+	m_answer.A11 = 1;
+	m_answer.A12 = 0;
+	m_answer.A13 = 0;
+	m_answer.A21 = 0;
+	m_answer.A22 = 1;
+	m_answer.A23 = 0;
+	m_answer.A31 = dx;
+	m_answer.A32 = dy;
+	m_answer.A33 = 1;
+
+	return m_answer;
 }
 
-Matrix3f Matrix3f::scale(const double t_scalingfactor)
+Matrix3f Matrix3f::scale(const int dx, int dy)
 {
-	return Matrix3f();
+	Matrix3f m_answer;
+	m_answer.A11 = (double)dx / 100;
+	m_answer.A12 = 0;
+	m_answer.A13 = 0;
+	m_answer.A21 = 0;
+	m_answer.A22 = (double)dy / 100;
+	m_answer.A23 = 0;
+	m_answer.A31 = 0;
+	m_answer.A32 = 0;
+	m_answer.A33 = 1;
+
+	return m_answer;
 }
 
 Matrix3f Matrix3f::scale3D(int dx)
 {
-	return Matrix3f();
+	Matrix3f m_answer;
+	m_answer.A11 = (double)dx / 100;
+	m_answer.A12 = 0;
+	m_answer.A13 = 0;
+	m_answer.A21 = 0;
+	m_answer.A22 = (double)dx / 100;
+	m_answer.A23 = 0;
+	m_answer.A31 = 0;
+	m_answer.A32 = 0;
+	m_answer.A33 = (double)dx / 100;
+
+	return m_answer;
 }
 
-
-
-Matrix3f Matrix3f::operator*(const double t_scale) const
-{
-	return Matrix3f();
-}
 
 
 

@@ -1,6 +1,7 @@
+#pragma once
+
 #include <iostream>
-#include <SFML/Graphics.hpp>
-#include <math.h>
+#include <string>
 
 
 class Vector3f

@@ -1,4 +1,5 @@
 #include "Vector3f.h"
+
 Vector3f::Vector3f() :
 	m_x {0.0},
 	m_y {0.0},
@@ -20,6 +21,7 @@ Vector3f::Vector3f(double t_x, double t_y, double t_z)
 
 std::string Vector3f::toString()
 {
+	
 	return ("X: " + std::to_string(m_y) + ",Y: " + std::to_string(m_y) + ",Z:" + std::to_string(m_z));
 }
 
@@ -77,7 +79,7 @@ Vector3f Vector3f::operator^(Vector3f V1) const
 
 double Vector3f::length() const
 {
-	return sqrtl(m_x * m_x + m_y * m_y + m_z * m_z);
+	return sqrtf(m_x * m_x + m_y * m_y + m_z * m_z);
 }
 
 double Vector3f::lengthSquared() const
