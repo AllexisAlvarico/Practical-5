@@ -1,4 +1,5 @@
 #include "Matrix3f.h"
+#include "Vector3f.h"
 
 Matrix3f::Matrix3f()
 {
@@ -143,6 +144,8 @@ Matrix3f Matrix3f::operator*(const Matrix3f t_other) const
 	m_answer.A31 = row(2) * t_other.column(0);
 	m_answer.A32 = row(2) * t_other.column(1);
 	m_answer.A33 = row(2) * t_other.column(2);
+
+	return m_answer;
 }
 
 Vector3f Matrix3f::row(const int t_row) const

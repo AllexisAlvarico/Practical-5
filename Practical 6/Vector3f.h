@@ -8,7 +8,6 @@ class Vector3f
 {
 public:
 	Vector3f();
-	~Vector3f();
 
 	double m_x;
 	double m_y;

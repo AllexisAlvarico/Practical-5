@@ -1,5 +1,6 @@
 #include "Vector2f.h"
 
+
 Vector2f::Vector2f() :
 	m_x{ 0.0 },
 	m_y{ 0.0 }
@@ -62,7 +63,7 @@ Vector2f Vector2f::operator/(const double t_divisor) const
 
 double Vector2f::length() const
 {
-	return sqrtf(m_x * m_x + m_y * m_y);
+	return sqrt(m_x * m_x + m_y * m_y);
 }
 
 double Vector2f::lengthSquared() const

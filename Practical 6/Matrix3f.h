@@ -17,8 +17,6 @@ public:
 		double t_a21, double t_a22, double t_a23,
 		double t_a31, double t_a32, double t_a33);
 
-
-
 	std::string toString()const;
 
 	Matrix3f operator +(const Matrix3f t_other) const;

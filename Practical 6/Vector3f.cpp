@@ -76,7 +76,7 @@ Vector3f Vector3f::operator^(Vector3f V1) const
 
 double Vector3f::length() const
 {
-	return sqrtf(m_x * m_x + m_y * m_y + m_z * m_z);
+	return sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
 }
 
 double Vector3f::lengthSquared() const

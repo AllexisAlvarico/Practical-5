@@ -32,7 +32,7 @@ std::string Quaternion::ToString()
 
 double Quaternion::Modulus()
 {
-	return sqrtf(m_w * m_w + m_x * m_x + m_y * m_y + m_z * m_z);
+	return sqrt(m_w * m_w + m_x * m_x + m_y * m_y + m_z * m_z);
 }
 
 Quaternion Quaternion::Normalise()
