@@ -17,13 +17,6 @@ Vector3f::Vector3f(double t_x, double t_y, double t_z)
 	m_z = t_z;
 }
 
-Vector3f::Vector3f(Vector3f& V)
-{
-	m_x = V.m_x;
-	m_y = V.m_y;
-	m_z = V.m_z;
-}
-
 
 std::string Vector3f::toString()
 {
@@ -50,9 +43,16 @@ Vector3f Vector3f::operator-(Vector3f V)
 	return V1;
 }
 
+
+
 Vector3f Vector3f::operator*(const double k) const
 {
 	return { k * m_x, k * m_y, k * m_z };
+}
+
+double Vector3f::operator*(Vector3f V) const
+{
+	return (m_x * V.m_x + m_y * V.m_y + m_z * V.m_z);
 }
 
 Vector3f Vector3f::operator*(const float k) const
@@ -72,7 +72,7 @@ Vector3f Vector3f::operator/(const double t_divisor) const
 
 Vector3f Vector3f::operator^(Vector3f V1) const
 {
-	return (m_y* V1.m_z - m_z * V1.m_y, m_z* V1.m_x - m_x * V1.m_z, m_x* V1.m_y - m_y * V1.m_x);
+	return { m_y * V1.m_z - m_z * V1.m_y, m_z * V1.m_x - m_x * V1.m_z, m_x * V1.m_y - m_y * V1.m_x };
 }
 
 double Vector3f::length() const
