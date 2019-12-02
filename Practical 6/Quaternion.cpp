@@ -27,7 +27,7 @@ Quaternion::Quaternion(double t_w, Vector3f t_v)
 
 std::string Quaternion::ToString()
 {
-	return std::string();
+	return "W: " + std::to_string(m_w) + ",X: " + std::to_string(m_x) + ",I:" + std::to_string(m_y) + ",j:" + std::to_string(m_z) + "k)";
 }
 
 double Quaternion::Modulus()

@@ -41,7 +41,10 @@ Matrix3f::Matrix3f(const Vector3f t_row1, const Vector3f t_row2, const Vector3f 
 
 std::string Matrix3f::toString() const
 {
-	return std::string();
+	return 		"|Row 1[" + std::to_string(A11) + "," + std::to_string(A12) + "," + std::to_string(A13) + "]|"
+		+ "\n|Row 2[" + std::to_string(A21) + "," + std::to_string(A22) + "," + std::to_string(A23) + "]|"
+		+ "\n|Row 3[" + std::to_string(A31) + "," + std::to_string(A32) + "," + std::to_string(A33) + "]|"; // displays all of this
+	;
 }
 
 Matrix3f Matrix3f::operator+(const Matrix3f t_other) const
