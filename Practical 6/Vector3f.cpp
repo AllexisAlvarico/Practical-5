@@ -7,9 +7,6 @@ Vector3f::Vector3f() :
 {
 }
 
-Vector3f::~Vector3f()
-{
-}
 
 Vector3f::Vector3f(double t_x, double t_y, double t_z)
 {

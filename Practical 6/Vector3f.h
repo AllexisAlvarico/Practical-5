@@ -30,10 +30,4 @@ public:
 	double length()const;
 	double lengthSquared()const;
 	void normalise(); // vector changes and will have length 1 
-
-
-private:
-
-
-
 };
