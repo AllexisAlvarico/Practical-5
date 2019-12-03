@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Matrix3f.h"
 #include "Vector3f.h"
+#include "Quaternion.h"
 
 int main()
 {
@@ -10,6 +11,8 @@ int main()
 	Vector3f m_vector2{};
 	Matrix3f m_matrix1{};
 	Matrix3f m_matrix2{};
+
+
 
 	m_vector1 = { 8.0,2.0,3.0 };
 	std::cout << m_vector1.toString();
@@ -136,7 +139,7 @@ int main()
 	std::cout << "|Row 1[19.0     ,15.0     ,29.0     ]|" << std::endl; // display
 	std::cout << "|---------------------------------|" << std::endl; // display
 	std::cout << "|[	     Answer		 ]|" << std::endl; // display
-	std::cout <<  m_vector1.toString() << std::endl; // displays the answer
+	std::cout << m_vector1.toString() << std::endl; // displays the answer
 	std::cout << "|---------------------------------|" << std::endl; // display
 
 	m_matrix1 = { 5,2,3,6,8,7,9,2,3 }; // matrix's value
@@ -176,7 +179,7 @@ int main()
 	std::cout << "|[	      Answer		    ]|" << std::endl; // display
 	std::cout << m_matrix1.toString() << std::endl; // displays the answer
 	std::cout << "|------------------------------------|" << std::endl; // display
-	
+
 	// rotation z
 
 	m_matrix1 = { 5,3,9,7,5,2,6,4,9 }; // the matrix3's value
@@ -196,7 +199,7 @@ int main()
 	std::cout << "|------------------------------------|" << std::endl; // display
 
 	m_matrix1 = { 4,4,4,4,2,5,2,5,-3 };
-	m_matrix1 = m_matrix1.translation(5,6); // calls the translation functions and pass a vector
+	m_matrix1 = m_matrix1.translation(5, 6); // calls the translation functions and pass a vector
 	std::cout << "|	      Translate              |" << std::endl; // display
 	std::cout << m_matrix1.toString() << std::endl; // displays the answer
 	std::cout << "|------------------------------------|" << std::endl; // display
@@ -210,6 +213,25 @@ int main()
 	std::cout << "|	      Scale3D              |" << std::endl; // display
 	std::cout << m_matrix1.toString() << std::endl; // displays the answer
 	std::cout << "|------------------------------------|" << std::endl; // display
+
+
+	//set vectors for tests
+	Vector3f m_vector3{ 0, 2, -5 };
+	Vector3f m_vector4{ -2, -2, -5 };
+	Vector3f m_vector5{2, -2, -5};
+
+	std::cout << "V3 Lenght: " << std::to_string(m_vector3.length()) << std::endl;
+	std::cout << "V4 Lenght: " << std::to_string(m_vector4.length()) << std::endl;
+	std::cout << "V3 Lenght Squared: " << std::to_string(m_vector3.lengthSquared()) << std::endl;
+	std::cout << "V4 Lenght Squared: " << std::to_string(m_vector4.lengthSquared()) << std::endl;
+	
+	Matrix3f m_matrix3{ 1,0,0,0,1,0,0,0,1 };
+	m_vector5 = m_matrix3.rotationZ(23.21) * m_vector5;
+	std::cout << "Z Rotation: " << m_vector5.toString() << std::endl;
+
+	//rotationz 23.21 v3
+
+	//quaternion rotate v3
 
 
 	system("PAUSE");
