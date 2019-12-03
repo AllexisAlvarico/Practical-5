@@ -18,8 +18,7 @@ Vector3f::Vector3f(double t_x, double t_y, double t_z)
 
 std::string Vector3f::toString()
 {
-	
-	return ("X: " + std::to_string(m_y) + ",Y: " + std::to_string(m_y) + ",Z:" + std::to_string(m_z));
+	return ("X: " + std::to_string(m_x) + ",Y: " + std::to_string(m_y) + ",Z:" + std::to_string(m_z) + "\n");
 }
 
 Vector3f Vector3f::operator+(const Vector3f t_right) const
@@ -86,12 +85,14 @@ double Vector3f::lengthSquared() const
 
 void Vector3f::normalise()
 {
-	Vector3f m_newVector = {}; // vector's assignments
+	//Vector3f m_newVector = {}; // vector's assignments
 	if (length() > 0.0)
 	{
-		m_x = m_x / m_newVector.length(); // gets the x-value
-		m_y = m_y / m_newVector.length(); // gets the y-value
-		m_z = m_z / m_newVector.length(); // gets the z-value
+		double m_mag = length();
+		m_x = m_x / m_mag; // gets the x-value
+		m_y = m_y / m_mag; // gets the y-value
+		m_z = m_z / m_mag; 
+		// gets the z-value
 	}
 
 

@@ -62,9 +62,10 @@ Matrix3f Matrix3f::operator-(const Matrix3f t_other) const
 				A31 - t_other.A31, A32 - t_other.A32, A33 - t_other.A33 };
 }
 
-Matrix3f Matrix3f::operator-(const Matrix3f t_matrix3f)
+Matrix3f Matrix3f::operator-()
 {
-	return (t_matrix3f * -1);
+	Matrix3f m_answer;
+	return m_answer * (-1);
 }
 
 Matrix3f Matrix3f::operator*(const double x) const
@@ -91,6 +92,8 @@ Vector3f Matrix3f::operator*(Vector3f V1)
 		A31 * V1.m_x + A32 * V1.m_y + A33 * V1.m_z);
 }
 
+
+
 Matrix3f Matrix3f::transpose() const
 {
 	return{A11, A21, A31,
@@ -98,7 +101,7 @@ Matrix3f Matrix3f::transpose() const
 		A13, A23, A33};
 }
 
-double Matrix3f::determinant(Matrix3f t_other) const
+double Matrix3f::determinant() const
 {
 	return (A11 * A22 * A33 - A11 * A32 * A23 + A21 * A32 *
 		A13 - A31 * A22 * A13 + A31* A12 * A23- A21 * A12 * A33);
@@ -106,13 +109,13 @@ double Matrix3f::determinant(Matrix3f t_other) const
 
 Matrix3f Matrix3f::inverse(Matrix3f t_other) const
 {
-	double det = determinant(t_other);
+	double det = determinant();
 	if (det == 0)
 		return Matrix3f();
 	else
 	{
 		double scale = 1 / det;
-		Matrix3f m_answer = Matrix3f();
+		Matrix3f m_answer;
 		m_answer.A11 = scale * (t_other.A22 * t_other.A33 - t_other.A23 * t_other.A32); // ei-fh
 		m_answer.A12 = scale * (t_other.A13 * t_other.A32 - t_other.A12 * t_other.A33); // ch-bi
 		m_answer.A13 = scale * (t_other.A12 * t_other.A23 - t_other.A13 * t_other.A22); // ch-bi
